@@ -9,28 +9,28 @@
 
         <table class="table" *ngIf="currentUsersType === LoadedUsersType.Income">
             <tr *ngFor="let user of incomeUsers">
-                <td>{{user.name.first}}</td>
+                <td>{{user.name.first + ' ' + user.name.last}}</td>
                 <td>{{user.amount}}</td>
             </tr>
         </table>
 
         <table class="table" *ngIf="currentUsersType === LoadedUsersType.Outcome">
             <tr *ngFor="let user of outcomeUsers">
-                <td>{{user.name.first}}</td>
+                <td>{{user.name.first + ' ' + user.name.last}}</td>
                 <td>{{user.amount}}</td>
             </tr>
         </table>
 
         <table class="table" *ngIf="currentUsersType === LoadedUsersType.Loan">
             <tr *ngFor="let user of loanUsers">
-                <td>{{user.name.first}}</td>
+                <td>{{user.name.first + ' ' + user.name.last}}</td>
                 <td>{{user.amount}}</td>
             </tr>
         </table>
 
         <table class="table" *ngIf="currentUsersType === LoadedUsersType.Investment">
             <tr *ngFor="let user of investmentUsers">
-                <td>{{user.name.first}}</td>
+                <td>{{user.name.first + ' ' + user.name.last}}</td>
                 <td>{{user.amount}}</td>
             </tr>
         </table>
