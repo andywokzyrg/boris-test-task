@@ -5,10 +5,10 @@ import {UserItem} from "../shared/interfaces";
 import {BehaviorSubject} from "rxjs";
 
 export enum LoadedUsersType {
-    Income = 0,
-    Outcome = 1,
-    Loan = 2,
-    Investment = 3
+    Income = 1,
+    Outcome = 2,
+    Loan = 3,
+    Investment = 4
 }
 
 @Component({
