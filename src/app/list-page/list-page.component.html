@@ -1,35 +1,14 @@
-<div class="flex-container" *ngIf="currentUsersType$ | async as currentUsersType">
+<div class="flex-container">
     <div class="content">
         <app-nav-menu>
-            <app-nav-item (click)="showIncome()" [ngClass]="{active: currentUsersType === LoadedUsersType.Income}">Income</app-nav-item>
-            <app-nav-item (click)="showOutcome()" [ngClass]="{active: currentUsersType === LoadedUsersType.Outcome}">Outcome</app-nav-item>
-            <app-nav-item (click)="showLoans()" [ngClass]="{active: currentUsersType === LoadedUsersType.Loan}">Loans</app-nav-item>
-            <app-nav-item (click)="showInvestments()" [ngClass]="{active: currentUsersType === LoadedUsersType.Investment}">Investments</app-nav-item>
+            <app-nav-item routerLink="/navigator" [queryParams]="{tab: 0}" routerLinkActive="active">Income</app-nav-item>
+            <app-nav-item routerLink="/navigator" [queryParams]="{tab: 1}" routerLinkActive="active">Outcome</app-nav-item>
+            <app-nav-item routerLink="/navigator" [queryParams]="{tab: 2}" routerLinkActive="active">Loans</app-nav-item>
+            <app-nav-item routerLink="/navigator" [queryParams]="{tab: 3}" routerLinkActive="active">Investments</app-nav-item>
         </app-nav-menu>
 
-        <table class="table" *ngIf="currentUsersType === LoadedUsersType.Income">
-            <tr *ngFor="let user of incomeUsers">
-                <td>{{user.name.first + ' ' + user.name.last}}</td>
-                <td>{{user.amount}}</td>
-            </tr>
-        </table>
-
-        <table class="table" *ngIf="currentUsersType === LoadedUsersType.Outcome">
-            <tr *ngFor="let user of outcomeUsers">
-                <td>{{user.name.first + ' ' + user.name.last}}</td>
-                <td>{{user.amount}}</td>
-            </tr>
-        </table>
-
-        <table class="table" *ngIf="currentUsersType === LoadedUsersType.Loan">
-            <tr *ngFor="let user of loanUsers">
-                <td>{{user.name.first + ' ' + user.name.last}}</td>
-                <td>{{user.amount}}</td>
-            </tr>
-        </table>
-
-        <table class="table" *ngIf="currentUsersType === LoadedUsersType.Investment">
-            <tr *ngFor="let user of investmentUsers">
+        <table class="table">
+            <tr *ngFor="let user of users">
                 <td>{{user.name.first + ' ' + user.name.last}}</td>
                 <td>{{user.amount}}</td>
             </tr>

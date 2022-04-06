@@ -1,54 +1,35 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from "@angular/router";
 import {UsersDataService} from "../shared/users-data.service";
 import {UserItem} from "../shared/interfaces";
-import {BehaviorSubject} from "rxjs";
-
-export enum LoadedUsersType {
-    Income = 1,
-    Outcome = 2,
-    Loan = 3,
-    Investment = 4
-}
+import {combineLatest} from "rxjs";
 
 @Component({
     selector: 'app-list-page',
     templateUrl: './list-page.component.html',
-    styleUrls: ['./list-page.component.scss']
+    styleUrls: ['./list-page.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListPageComponent implements OnInit {
     users!: UserItem[]
-    incomeUsers: UserItem[] = this.usersService.data.filter(user => user.type === 'income')
-    outcomeUsers: UserItem[] = this.usersService.data.filter(user => user.type === 'outcome')
-    loanUsers: UserItem[] = this.usersService.data.filter(user => user.type === 'loan')
-    investmentUsers: UserItem[] = this.usersService.data.filter(user => user.type === 'investment')
 
-    currentUsersType$ = new BehaviorSubject<LoadedUsersType>(LoadedUsersType.Income)
-    LoadedUsersType = LoadedUsersType
-
-    constructor(private router: Router, public usersService: UsersDataService) {
+    constructor(private router: Router, private activatedRoute: ActivatedRoute, public usersService: UsersDataService) {
     }
 
     ngOnInit(): void {
-    }
-
-    showIncome() {
-        this.router.navigate(['/navigator'], {queryParams: {tab: 0}});
-        this.currentUsersType$.next(LoadedUsersType.Income)
-    }
-
-    showOutcome() {
-        this.router.navigate(['/navigator'], {queryParams: {tab: 1}});
-        this.currentUsersType$.next(LoadedUsersType.Outcome)
-    }
-
-    showLoans() {
-        this.router.navigate(['/navigator'], {queryParams: {tab: 2}});
-        this.currentUsersType$.next(LoadedUsersType.Loan)
-    }
-
-    showInvestments() {
-        this.router.navigate(['/navigator'], {queryParams: {tab: 3}});
-        this.currentUsersType$.next(LoadedUsersType.Investment)
+        combineLatest(this.activatedRoute.queryParams, this.usersService.data$).subscribe(([query, users]) => {
+            if (query['tab'] === '0') {
+                this.users = users.filter(user => user.type === 'income')
+            }
+            if (query['tab'] === '1') {
+                this.users = users.filter(user => user.type === 'outcome')
+            }
+            if (query['tab'] === '2') {
+                this.users = users.filter(user => user.type === 'loan')
+            }
+            if (query['tab'] === '3') {
+                this.users = users.filter(user => user.type === 'investment')
+            }
+        })
     }
 }

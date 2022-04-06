@@ -1,5 +1,6 @@
 import {Injectable} from "@angular/core";
 import {UserItem} from "./interfaces";
+import {of} from "rxjs";
 
 @Injectable({providedIn: 'root'})
 export class UsersDataService {
@@ -1308,8 +1309,12 @@ export class UsersDataService {
             }
         ]
     }
+
     data: UserItem[] = this.usersDataJSON.data
-    total: number = this.usersDataJSON.total
+    getData() {
+        return of(this.usersDataJSON.data)
+    }
+    data$= this.getData()
 }
 
 
