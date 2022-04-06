@@ -15,3 +15,4 @@ export interface Name {
 }
 
 export type PaymentType = 'income' | 'outcome' | 'loan' | 'investment' | string
+export type UserType = 'income' | 'outcome' | 'loan' | 'investment'

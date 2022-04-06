@@ -1,10 +1,7 @@
 <div class="flex-container">
     <div class="content">
         <app-nav-menu>
-            <app-nav-item routerLink="/navigator" [queryParams]="{tab: 0}" routerLinkActive="active">Income</app-nav-item>
-            <app-nav-item routerLink="/navigator" [queryParams]="{tab: 1}" routerLinkActive="active">Outcome</app-nav-item>
-            <app-nav-item routerLink="/navigator" [queryParams]="{tab: 2}" routerLinkActive="active">Loans</app-nav-item>
-            <app-nav-item routerLink="/navigator" [queryParams]="{tab: 3}" routerLinkActive="active">Investments</app-nav-item>
+            <app-nav-item *ngFor="let type of types; let i=index" routerLink="/navigator" [queryParams]="{tab: i}" routerLinkActive="active">{{type | titlecase}}</app-nav-item>
         </app-nav-menu>
 
         <table class="table">
