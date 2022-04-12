@@ -1314,7 +1314,7 @@ export class UsersDataService {
     getData() {
         return of(this.usersDataJSON.data)
     }
-    data$= this.getData()
+    data$ = this.getData()
 }
 
 
